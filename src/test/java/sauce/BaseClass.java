@@ -19,13 +19,15 @@ import org.testng.annotations.BeforeMethod;
 import sauce.pom.LoginPageElements;
 import sauce.pom.SideBarElements;
 
+// Just a change to check
+
 public class BaseClass {
-	
+
 	public static WebDriver driver;
 	public Properties prop;
 	public FileInputStream fis;
 	public LoginPageElements lpe;
-	
+
 	public String username;
 	public String password;
 	public String url;
@@ -39,10 +41,9 @@ public class BaseClass {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--disable-save-password-bubble");
 		options.addArguments("--disable-infobars");
-		Map<String, Object> prefs = new HashMap<>();
-		prefs.put("credentials_enable_service", false);
-		prefs.put("profile.password_manager_enabled", false);
-		options.setExperimentalOption("prefs", prefs);
+		Map<String, Object> preference = new HashMap<>();
+		preference.put("profile.password_manager_enabled", false);
+		options.setExperimentalOption("prefs", preference);
 
 		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
@@ -69,17 +70,17 @@ public class BaseClass {
 
 	@BeforeMethod
 	public void login() {
-			lpe = new LoginPageElements(driver);
-			lpe.getUsernameTextfield().sendKeys(username);
-			lpe.getPasswordTextfield().sendKeys(password);
-			lpe.getLoginButton().click();
+		lpe = new LoginPageElements(driver);
+		lpe.getUsernameTextfield().sendKeys(username);
+		lpe.getPasswordTextfield().sendKeys(password);
+		lpe.getLoginButton().click();
 	}
 
 	@AfterMethod
 	public void logout() {
-			SideBarElements sbe = new SideBarElements(driver);
-			sbe.openSideBar();
-			sbe.getLogoutLink().click();
+		SideBarElements sbe = new SideBarElements(driver);
+		sbe.openSideBar();
+		sbe.getLogoutLink().click();
 	}
 
 	@AfterClass
