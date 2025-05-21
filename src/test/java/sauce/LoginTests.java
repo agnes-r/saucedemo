@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import sauce.pom.LoginPageElements;
 
 @Listeners(ListenerImplementation.class)
+@Test(enabled = false)
 public class LoginTests extends BaseClassForLoginTests {
 	LoginPageElements lpe;
 

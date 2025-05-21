@@ -27,17 +27,24 @@ public class HomePageElements {
 
 	@FindBy(xpath = "//a[@class='shopping_cart_link']")
 	private WebElement cartIcon;
+	
+	@FindBy(xpath = "//button[text()='Remove']")
+	private List<WebElement> removeBtn;
+
+	public List<WebElement> getRemoveBtn() {
+		return removeBtn;
+	}
 
 	public HomePageElements(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 
-	public List<WebElement> getFirstProductAddToCartButton() {
+	public List<WebElement> getAddToCartButton() {
 		return addToCartButton;
 	}
 
-	public List<WebElement> getFirstProductLink() {
+	public List<WebElement> getProductLink() {
 		return productLink;
 	}
 

@@ -19,11 +19,11 @@ import org.testng.annotations.BeforeMethod;
 import sauce.pom.LoginPageElements;
 import sauce.pom.SideBarElements;
 
-// Just a change to check
 
 public class BaseClass {
 
 	public static WebDriver driver;
+	
 	public Properties prop;
 	public FileInputStream fis;
 	public LoginPageElements lpe;
@@ -32,9 +32,6 @@ public class BaseClass {
 	public String password;
 	public String url;
 
-	public boolean skipLogin = false;
-	public boolean isLoggedIn = false;
-
 	@BeforeClass
 	public void openBrowser() {
 
@@ -42,10 +39,12 @@ public class BaseClass {
 		options.addArguments("--disable-save-password-bubble");
 		options.addArguments("--disable-infobars");
 		Map<String, Object> preference = new HashMap<>();
+		preference.put("credentials_enable_service", false);
 		preference.put("profile.password_manager_enabled", false);
 		options.setExperimentalOption("prefs", preference);
 
 		driver = new ChromeDriver(options);
+		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 
@@ -64,7 +63,6 @@ public class BaseClass {
 		password = prop.getProperty("password");
 
 		driver.get(url);
-		lpe = new LoginPageElements(driver);
 
 	}
 
